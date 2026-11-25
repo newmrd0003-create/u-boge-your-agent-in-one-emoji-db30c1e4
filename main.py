@@ -18,6 +18,11 @@ def main() -> None:
     os.makedirs(os.path.dirname(OUTPUT), exist_ok=True)
     with open(OUTPUT, "w", encoding="utf-8", newline="") as f:
         f.write(EMOJI)
+    # Self-check: read the file back and make sure it holds exactly the emoji.
+    with open(OUTPUT, "r", encoding="utf-8", newline="") as f:
+        written = f.read()
+    if written != EMOJI:
+        raise SystemExit(f"entry mismatch: wrote {written!r}, expected {EMOJI!r}")
 
 
 if __name__ == "__main__":
